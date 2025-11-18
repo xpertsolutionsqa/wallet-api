@@ -130,8 +130,12 @@ app.post("/generate-pass", async (req, res) => {
     console.log(`✅ Pass generated: ${fileName}`);
 
     // Get local IP for mobile access
-    const localIP = getLocalIP();
-    const passUrl = `http://${localIP}:${PORT}/passes/${fileName}`;
+    // const localIP = getLocalIP();
+    // const passUrl = `http://${localIP}:${PORT}/passes/${fileName}`;
+
+    const baseUrl =
+      process.env.RENDER_EXTERNAL_URL || `http://localhost:${PORT}`;
+    const passUrl = `${baseUrl}/passes/${fileName}`;
 
     res.json({
       success: true,
