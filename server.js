@@ -414,7 +414,7 @@ END:VCARD`;
 
     // Create JWT
     const claims = {
-      iss: googleServiceAccount.client_email,
+      iss: process.env.CLIENT_EMAIL,
       aud: "google",
       origins: [],
       typ: "savetowallet",
@@ -424,7 +424,7 @@ END:VCARD`;
       },
     };
 
-    const token = jwt.sign(claims, googleServiceAccount.private_key, {
+    const token = jwt.sign(claims, process.env.PRIVATE_KEY, {
       algorithm: "RS256",
     });
 
