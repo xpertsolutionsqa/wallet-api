@@ -1,0 +1,20 @@
+{
+  "name": "wallet-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@walletpass/pass-js": "^6.9.1",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "googleapis": "^166.0.0",
+    "jsonwebtoken": "^9.0.2"
+  }
+}

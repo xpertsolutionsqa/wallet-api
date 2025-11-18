@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Wallet Test</title>
+    <style>
+      body {
+        font-family: Arial;
+        padding: 20px;
+        text-align: center;
+      }
+      button {
+        background: #007aff;
+        color: white;
+        padding: 15px 30px;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        margin: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Wallet Test</h2>
+
+    <button onclick="testAppleWallet()">Test Apple Wallet</button>
+    <button onclick="testGoogleWallet()">Test Google Wallet</button>
+
+    <div id="result" style="margin-top: 20px"></div>
+
+    <script>
+      const API_BASE = "http://192.168.1.45:3000"; // Tumhara Node.js server IP
+
+      function testAppleWallet() {
+        document.getElementById("result").innerHTML = "Generating...";
+
+        fetch(API_BASE + "/generate-pass", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name: "Test User",
+            phone: "+97433261780",
+            email: "test@test.com",
+          }),
+        })
+          .then((r) => r.json())
+          .then((data) => {
+            document.getElementById("result").innerHTML =
+              "Opening: " + data.passUrl;
+            window.location.href = data.passUrl;
+          })
+          .catch((e) => {
+            document.getElementById("result").innerHTML = "Error: " + e;
+          });
+      }
+
+      function testGoogleWallet() {
+        document.getElementById("result").innerHTML = "Generating...";
+
+        fetch(API_BASE + "/generate-google-pass", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name: "Test User",
+            phone: "+97433261780",
+            email: "test@test.com",
+          }),
+        })
+          .then((r) => r.json())
+          .then((data) => {
+            document.getElementById("result").innerHTML =
+              "Opening: " + data.saveUrl;
+            window.location.href = data.saveUrl;
+          })
+          .catch((e) => {
+            document.getElementById("result").innerHTML = "Error: " + e;
+          });
+      }
+    </script>
+  </body>
+</html>
